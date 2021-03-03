@@ -36,6 +36,8 @@ class Exercise2 {}
 // the state of exercise 3
 // Adrian
 class Exercise3 {
+  // this function would randomly generate circles which would mimic doorknob, 
+  // in the future, make sure circles do not touch or lay on top of each other 
 function () {
   createCanvas(500, 500);
   noStroke();
