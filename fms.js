@@ -1,6 +1,7 @@
 // global constants
 const WIDTH = 640;
 const HEIGHT = 1136;
+const BUTTON_DIAMETER = 140;
 
 // Point Class for storing points
 class Point {
@@ -18,9 +19,16 @@ class State {
   
   constructor() {
     this.exercise = new Exercise1();
-    this.button1 = new Point(WIDTH/4, HEIGHT-100);
-    this.button2 = new Point(2*WIDTH/4, HEIGHT-100);
-    this.button3 = new Point(3*WIDTH/4, HEIGHT-100);
+    this.button1 = new Point(1*WIDTH/6, HEIGHT-100);
+    this.button2 = new Point(3*WIDTH/6, HEIGHT-100);
+    this.button3 = new Point(5*WIDTH/6, HEIGHT-100);
+  }
+  
+  draw() {
+    fill('magenta');
+    circle(this.button1.x,this.button1.y,BUTTON_DIAMETER);
+    circle(this.button2.x,this.button2.y,BUTTON_DIAMETER);
+    circle(this.button3.x,this.button3.y,BUTTON_DIAMETER);
   }
 }
 
@@ -51,7 +59,8 @@ function setup() {
 // draw
 // Ben
 function draw() {
-  background(220);
+  background(256);
+  state.draw();
 }
 
 
