@@ -35,7 +35,17 @@ class Exercise2 {}
 
 // the state of exercise 3
 // Adrian
-class Exercise3 {}
+class Exercise3 {
+function () {
+  createCanvas(500, 500);
+  noStroke();
+  for (let i = 0; i < 5; i++) {
+    fill(random(255), random(255), random(255));
+    let size = 100;
+    ellipse(random(400)+50, random(400)+50, size, size)
+  }
+}
+}
 
 
 // state object
@@ -53,5 +63,4 @@ function setup() {
 function draw() {
   background(220);
 }
-
 
