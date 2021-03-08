@@ -36,14 +36,44 @@ class Exercise2 {}
 // the state of exercise 3
 // Adrian
 class Exercise3 {
-  // this function would randomly generate circles which would mimic doorknob
-function () {
-  createCanvas(500, 500);
-  noStroke();
-  for (let i = 0; i < 5; i++) {
-    fill(random(255), random(255), random(255));
-    let size = 100;
-    ellipse(random(400)+50, random(400)+50, size, size)
+// this function would randomly generate circles which would mimic doorknob
+var circles = []; 
+
+function setup() {
+// createCanvas(640, 1136);
+  
+  // for (let i = 0; i < 5; i++) {
+  //   fill(random(255), random(255), random(255));
+  //   let size = 100;
+  //   ellipse(random(400)+50, random(400)+50, size, size)
+  // }
+  
+  for (var i = 0; i < 10; i++) {
+    var circle = {
+      x: random(width),
+      y: random(height),
+      r: random(12, 36)
+    }; 
+  
+    var overlapping = false; 
+  
+    for (var j = 0; j < circles.length; j++) {
+    var other = circles[j];
+    var d = dist(circle.x, circle.y, other.x, other.y);
+    if (d < circle.r + other.r) {
+      overlapping = true; 
+      }
+    }
+  
+  for (var i = 0; i < circles.length; i++) {
+    fill(255, 0, 150, 100);
+    noStroke();
+    ellipse(circles[i].x, circles[i].y, circles[i].r*2, circles[i].r*2);
+  }
+    
+   if (!overlapping) {
+    circles.push(circle);
+   }
   }
 }
 }
