@@ -25,29 +25,59 @@ class State {
   }
   
   draw() {
+    
+    // menu bar
     fill('magenta');
     circle(this.button1.x,this.button1.y,BUTTON_DIAMETER);
     circle(this.button2.x,this.button2.y,BUTTON_DIAMETER);
     circle(this.button3.x,this.button3.y,BUTTON_DIAMETER);
+    
+    // text
+    textSize(32);
+    textAlign(CENTER,CENTER);
+    fill(50);
+    text(this.exercise.getType(), 0,0,WIDTH,HEIGHT/10)
   }
 }
 
 
 // the state of exercise 1
 // Harrison
-class Exercise1 {}
+class Exercise1 {
+  
+  // gets the string type of the Exercise
+  getType() {
+    return "Exercise 1"
+  }
+}
 
 // the state of exercise 2
 // Yuxi
-class Exercise2 {}
+class Exercise2 {
+  
+  // gets the string type of the Exercise
+  getType() {
+    return "Exercise 2"
+  }
+}
+
 
 // the state of exercise 3
 // Adrian
-class Exercise3 {}
+class Exercise3 {
+  
+  // gets the string type of the Exercise
+  getType() {
+    return "Exercise 3"
+  }
+}
+
 
 
 // state object
 let state = new State();
+
+
 
 // setup
 // Ben
@@ -62,5 +92,3 @@ function draw() {
   background(256);
   state.draw();
 }
-
-
