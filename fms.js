@@ -46,7 +46,6 @@ class State {
     for(;i<t.length;i++) {
       let x = t[i].x;
       let y = t[i].y;
-      circle(x,y,BUTTON_DIAMETER);
       
       // check if the press is near the first button
       if(dist(x,y,this.button1.x,this.button1.y) < BUTTON_DIAMETER/2) {
@@ -68,22 +67,24 @@ class State {
 
 
 // the state of exercise 1
-// Harrison
+// Yuxi
+// line / pinching exercise
 class Exercise1 {
   
   // gets the string type of the Exercise
   getType() {
-    return "Exercise 1"
+    return "Exercise 1";
   }
 }
 
 // the state of exercise 2
-// Yuxi
+// Harrison
+// foot exercise
 class Exercise2 {
   
   // gets the string type of the Exercise
   getType() {
-    return "Exercise 2"
+    return "Exercise 2";
   }
 }
 
@@ -94,7 +95,7 @@ class Exercise3 {
   
   // gets the string type of the Exercise
   getType() {
-    return "Exercise 3"
+    return "Exercise 3";
   }
 }
 
@@ -120,10 +121,6 @@ function draw() {
   
   // deep copy the values in touches
   t = JSON.parse(JSON.stringify(touches));
-  
-  // debugging:  display the number of touches on the screen
-  let display = t.length + ' touches';
-  text(display, WIDTH/2, 20);
   
   // perform an action for each touch
   state.touch(t);
