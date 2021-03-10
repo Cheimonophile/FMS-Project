@@ -38,6 +38,32 @@ class State {
     fill(50);
     text(this.exercise.getType(), 0,0,WIDTH,HEIGHT/10)
   }
+  
+  touch(t) {
+    
+    // check if the activity needs to be changed
+    var i=0;
+    for(;i<t.length;i++) {
+      let x = t[i].x;
+      let y = t[i].y;
+      circle(x,y,BUTTON_DIAMETER);
+      
+      // check if the press is near the first button
+      if(dist(x,y,this.button1.x,this.button1.y) < BUTTON_DIAMETER/2) {
+        this.exercise = new Exercise1();
+      }
+      
+      // check if the press is near the first button
+      if(dist(x,y,this.button2.x,this.button2.y) < BUTTON_DIAMETER/2) {
+        this.exercise = new Exercise2();
+      }
+      
+      // check if the press is near the first button
+      if(dist(x,y,this.button3.x,this.button3.y) < BUTTON_DIAMETER/2) {
+        this.exercise = new Exercise3();
+      }
+    }
+  }
 }
 
 
@@ -91,4 +117,14 @@ function setup() {
 function draw() {
   background(256);
   state.draw();
+  
+  // deep copy the values in touches
+  t = JSON.parse(JSON.stringify(touches));
+  
+  // debugging:  display the number of touches on the screen
+  let display = t.length + ' touches';
+  text(display, WIDTH/2, 20);
+  
+  // perform an action for each touch
+  state.touch(t);
 }
