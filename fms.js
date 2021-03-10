@@ -45,7 +45,7 @@ class Exercise3 {
     this.button3 = new Point(5*WIDTH/6, HEIGHT-100);
   }
 
-   draw() {
+   circles() {
     for (var i = 0; i < 10; i++) {
       var circle = {
         x: random(width),
