@@ -38,26 +38,53 @@ class State {
     fill(50);
     text(this.exercise.getType(), 0,0,WIDTH,HEIGHT/10)
   }
+  
+  touch(t) {
+    
+    // check if the activity needs to be changed
+    var i=0;
+    for(;i<t.length;i++) {
+      let x = t[i].x;
+      let y = t[i].y;
+      
+      // check if the press is near the first button
+      if(dist(x,y,this.button1.x,this.button1.y) < BUTTON_DIAMETER/2) {
+        this.exercise = new Exercise1();
+      }
+      
+      // check if the press is near the first button
+      if(dist(x,y,this.button2.x,this.button2.y) < BUTTON_DIAMETER/2) {
+        this.exercise = new Exercise2();
+      }
+      
+      // check if the press is near the first button
+      if(dist(x,y,this.button3.x,this.button3.y) < BUTTON_DIAMETER/2) {
+        this.exercise = new Exercise3();
+      }
+    }
+  }
 }
 
 
 // the state of exercise 1
-// Harrison
+// Yuxi
+// line / pinching exercise
 class Exercise1 {
   
   // gets the string type of the Exercise
   getType() {
-    return "Exercise 1"
+    return "Exercise 1";
   }
 }
 
 // the state of exercise 2
-// Yuxi
+// Harrison
+// foot exercise
 class Exercise2 {
   
   // gets the string type of the Exercise
   getType() {
-    return "Exercise 2"
+    return "Exercise 2";
   }
 }
 
@@ -68,7 +95,7 @@ class Exercise3 {
   
   // gets the string type of the Exercise
   getType() {
-    return "Exercise 3"
+    return "Exercise 3";
   }
 }
 
@@ -91,4 +118,10 @@ function setup() {
 function draw() {
   background(256);
   state.draw();
+  
+  // deep copy the values in touches
+  t = JSON.parse(JSON.stringify(touches));
+  
+  // perform an action for each touch
+  state.touch(t);
 }
