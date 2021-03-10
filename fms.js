@@ -45,8 +45,7 @@ class Exercise3 {
     this.button3 = new Point(5*WIDTH/6, HEIGHT-100);
   }
 
-   setup() {
-    var circles = [];
+   draw() {
     for (var i = 0; i < 10; i++) {
       var circle = {
         x: random(width),
@@ -64,7 +63,7 @@ class Exercise3 {
         }
       }
 
-      for (var i = 0; i < circles.length; i++) {
+      for (var k = 0; k < circles.length; k++) {
         fill(255, 0, 150, 100);
         noStroke();
         ellipse(circles[i].x, circles[i].y, circles[i].r * 2, circles[i].r * 2);
