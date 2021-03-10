@@ -95,10 +95,6 @@ class Exercise3 {
   // this function would randomly generate circles which would mimic doorknob
   constructor() {
     var circles = []; 
-    this.exercise03 = new Exercise3(); 
-    this.button1 = new Point(1*WIDTH/6, HEIGHT-100);
-    this.button2 = new Point(3*WIDTH/6, HEIGHT-100);
-    this.button3 = new Point(5*WIDTH/6, HEIGHT-100);
   }
 
    circles() {
