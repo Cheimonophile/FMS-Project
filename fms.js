@@ -32,6 +32,24 @@ class Exercise1 {}
 // the state of exercise 2
 // Yuxi
 class Exercise2 {}
+function setup() {
+  line(30,30,350,350);
+  circle(30,30,20);
+  circle(350,350,20)
+}
+let value = 255;
+function draw() {
+  fill(value);
+  noStroke();
+  circle(160,160,20)
+}
+function touchMoved() {
+  value = value - 4;
+  if (value < 0) {
+    value = 255;
+  }
+}
+
 
 // the state of exercise 3
 // Adrian
