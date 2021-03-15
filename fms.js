@@ -82,13 +82,28 @@ class Exercise1 {
 }
 
 // the state of exercise 2
-// Harrison
+// Yuxi
 // foot exercise
 class Exercise2 {
   
   // gets the string type of the Exercise
   getType() {
     return "Exercise 2";
+  }
+  
+  draw() {
+    fill(value);
+    noStroke();
+    circle(160,160,20)
+  }
+  
+  
+  touch(t) {
+    let value = 255;
+    value = value - 4;
+    if (value < 0) {
+      value = 255;
+    }
   }
 }
 
