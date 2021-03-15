@@ -28,6 +28,7 @@ class State {
     
     // menu bar
     fill('magenta');
+    stroke(1);
     circle(this.button1.x,this.button1.y,BUTTON_DIAMETER);
     circle(this.button2.x,this.button2.y,BUTTON_DIAMETER);
     circle(this.button3.x,this.button3.y,BUTTON_DIAMETER);
@@ -41,6 +42,9 @@ class State {
     text('Exercise\n1',this.button1.x,this.button1.y);
     text('Exercise\n2',this.button2.x,this.button2.y);
     text('Exercise\n3',this.button3.x,this.button3.y);
+    
+    // draw the exercise
+    this.exercise.draw();
   }
   
   touch(t) {
@@ -79,12 +83,21 @@ class Exercise1 {
   getType() {
     return "Exercise 1";
   }
+  
+  // draw function
+  draw() {}
 }
+
 
 // the state of exercise 2
 // Yuxi
 // foot exercise
 class Exercise2 {
+  
+  // constructor
+  constructor() {
+    this.color = 255;
+  }
   
   // gets the string type of the Exercise
   getType() {
@@ -92,17 +105,16 @@ class Exercise2 {
   }
   
   draw() {
-    fill(value);
+    fill(this.color);
     noStroke();
     circle(160,160,20)
   }
   
   
   touch(t) {
-    let value = 255;
-    value = value - 4;
-    if (value < 0) {
-      value = 255;
+    this.color = this.color - 4;
+    if (this.color < 0) {
+      this.color = 255;
     }
   }
 }
@@ -150,6 +162,8 @@ class Exercise3 {
   getType() {
     return "Exercise 3";
   }
+  
+  draw () {}
 }
 
 
