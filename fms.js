@@ -125,50 +125,49 @@ class Exercise2 {
 class Exercise3 {
   // this function would randomly generate circles which would mimic doorknob
   constructor() {
-    var circles = [];
+    this.circles = [];
 
-    function setup() {
+    while (this.circles.length < 10) {
+      // Pick a random circle
+      var circle = {
+        x: random(width),
+        y: random(height),
+        r: random(12, 36)
+      };
 
-      while (circles.length < 10) {
-        // Pick a random circle
-        var circle = {
-          x: random(width),
-          y: random(height),
-          r: random(12, 36)
-        };
-
-        // Does it overlap any previous circles?
-        var overlapping = false;
-        for (var j = 0; j < circles.length; j++) {
-          var other = circles[j];
-          var d = dist(circle.x, circle.y, other.x, other.y);
-          if (d < circle.r + other.r) {
-            overlapping = true;
-          }
+      // Does it overlap any previous circles?
+      var overlapping = false;
+      for (var j = 0; j < this.circles.length; j++) {
+        var other = this.circles[j];
+        var d = dist(circle.x, circle.y, other.x, other.y);
+        if (d < circle.r + other.r) {
+          overlapping = true;
         }
+      }
 
-        // If not keep it!
-        if (!overlapping) {
-          circles.push(circle);
-        }
+      // If not keep it!
+      if (!overlapping) {
+        this.circles.push(circle);
       }
     }
   }
+}
 
-  // gets the string type of the Exercise
-  getType() {
-    return "Exercise 3";
-  }
+// gets the string type of the Exercise
+getType(); {
+  return "Exercise 3";
+}
 
-  draw() {
-    // Draw all the circles
-    for (var i = 0; i < circles.length; i++) {
-      fill(255, 0, 175, 100);
-      noStroke();
-      ellipse(circles[i].x, circles[i].y, circles[i].r * 2, circles[i].r * 2);
-    }
+draw(); {
+  // Draw all the circles
+  for (var i = 0; i < this.circles.length; i++) {
+    fill(255, 0, 175, 100);
+    noStroke();
+    ellipse(this.circles[i].x, this.circles[i].y, this.circles[i].r * 2, this.circles[i].r * 2);
   }
 }
+
+
 
 
 
