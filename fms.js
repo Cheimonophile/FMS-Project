@@ -127,11 +127,11 @@ class Exercise3 {
   constructor() {
     this.circles = [];
 
-    while (this.circles.length < 10) {
+    for (var i = 0; i < 10; i++) {
       // Pick a random circle
       var circle = {
-        x: random(width),
-        y: random(height),
+        x: random(WIDTH - 0),
+        y: random(HEIGHT/10, 8*HEIGHT/10),
         r: random(12, 36)
       };
 
@@ -151,19 +151,19 @@ class Exercise3 {
       }
     }
   }
-}
 
-// gets the string type of the Exercise
-getType(); {
-  return "Exercise 3";
-}
+  // gets the string type of the Exercise
+  getType() {
+    return "Exercise 3";
+  }
 
-draw(); {
-  // Draw all the circles
-  for (var i = 0; i < this.circles.length; i++) {
-    fill(255, 0, 175, 100);
-    noStroke();
-    ellipse(this.circles[i].x, this.circles[i].y, this.circles[i].r * 2, this.circles[i].r * 2);
+  draw() {
+    // Draw all the circles
+    for (var i = 0; i < this.circles.length; i++) {
+      fill(255, 0, 175, 100);
+      noStroke();
+      ellipse(this.circles[i].x, this.circles[i].y, this.circles[i].r * 2, this.circles[i].r * 2);
+    }
   }
 }
 
