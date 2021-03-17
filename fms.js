@@ -38,7 +38,7 @@ class State {
     textSize(32);
     textAlign(CENTER,CENTER);
     fill(50);
-    text(this.exercise.getType(),0,0,WIDTH,HEIGHT/10);
+    text(this.exercise.getType(),WIDTH/2,HEIGHT/20);
     text('Exercise\n1',this.button1.x,this.button1.y);
     text('Exercise\n2',this.button2.x,this.button2.y);
     text('Exercise\n3',this.button3.x,this.button3.y);
