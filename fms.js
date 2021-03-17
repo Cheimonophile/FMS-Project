@@ -19,24 +19,24 @@ class State {
 
   constructor() {
     this.exercise = new Exercise1();
-    this.button1 = new Point(1*WIDTH/6, HEIGHT-100);
-    this.button2 = new Point(3*WIDTH/6, HEIGHT-100);
-    this.button3 = new Point(5*WIDTH/6, HEIGHT-100);
+    this.button1 = new Point(1 * WIDTH / 6, HEIGHT - 100);
+    this.button2 = new Point(3 * WIDTH / 6, HEIGHT - 100);
+    this.button3 = new Point(5 * WIDTH / 6, HEIGHT - 100);
   }
-  
+
   draw() {
-    
+
     // menu bar
     fill('magenta');
     stroke(1);
-    circle(this.button1.x,this.button1.y,BUTTON_DIAMETER);
-    circle(this.button2.x,this.button2.y,BUTTON_DIAMETER);
-    circle(this.button3.x,this.button3.y,BUTTON_DIAMETER);
-    
-    
+
+    circle(this.button1.x, this.button1.y, BUTTON_DIAMETER);
+    circle(this.button2.x, this.button2.y, BUTTON_DIAMETER);
+    circle(this.button3.x, this.button3.y, BUTTON_DIAMETER);
+
     // text
     textSize(32);
-    textAlign(CENTER,CENTER);
+    textAlign(CENTER, CENTER);
     fill(50);
     text(this.exercise.getType(),WIDTH/2,HEIGHT/20);
     text('Exercise\n1',this.button1.x,this.button1.y);
@@ -46,27 +46,27 @@ class State {
     // draw the exercise
     this.exercise.draw();
   }
-  
+
   touch(t) {
-    
+
     // check if the activity needs to be changed
-    var i=0;
-    for(;i<t.length;i++) {
+    var i = 0;
+    for (; i < t.length; i++) {
       let x = t[i].x;
       let y = t[i].y;
-      
+
       // check if the press is near the first button
-      if(dist(x,y,this.button1.x,this.button1.y) < BUTTON_DIAMETER/2) {
+      if (dist(x, y, this.button1.x, this.button1.y) < BUTTON_DIAMETER / 2) {
         this.exercise = new Exercise1();
       }
-      
+
       // check if the press is near the first button
-      if(dist(x,y,this.button2.x,this.button2.y) < BUTTON_DIAMETER/2) {
+      if (dist(x, y, this.button2.x, this.button2.y) < BUTTON_DIAMETER / 2) {
         this.exercise = new Exercise2();
       }
-      
+
       // check if the press is near the first button
-      if(dist(x,y,this.button3.x,this.button3.y) < BUTTON_DIAMETER/2) {
+      if (dist(x, y, this.button3.x, this.button3.y) < BUTTON_DIAMETER / 2) {
         this.exercise = new Exercise3();
       }
     }
@@ -83,7 +83,7 @@ class State {
 // Yuxi
 // line pinching exercise
 class Exercise1 {
-  
+
   // gets the string type of the Exercise
   getType() {
     return "Exercise 1";
@@ -94,31 +94,33 @@ class Exercise1 {
   
   // touch function
   touch(t) {}
+
 }
 
 
 // the state of exercise 2
-// Harrison
+// Yuxi
 // foot exercise
 class Exercise2 {
-  
+
   // constructor
   constructor() {
     this.color = 255;
   }
-  
+
   // gets the string type of the Exercise
   getType() {
     return "Exercise 2";
   }
-  
+
+
   draw() {
     fill(this.color);
     noStroke();
-    circle(160,160,20)
+    circle(160, 160, 20)
   }
-  
-  
+
+
   touch(t) {
     this.color = this.color - 4;
     if (this.color < 0) {
@@ -133,50 +135,53 @@ class Exercise2 {
 class Exercise3 {
   // this function would randomly generate circles which would mimic doorknob
   constructor() {
-    var circles = []; 
-  }
+    this.circles = [];
 
-   circles() {
     for (var i = 0; i < 10; i++) {
+      // Pick a random circle
       var circle = {
-        x: random(width),
-        y: random(height),
+        x: random(WIDTH - 0),
+        y: random(HEIGHT/10, 8*HEIGHT/10),
         r: random(12, 36)
       };
 
+      // Does it overlap any previous circles?
       var overlapping = false;
-
-      for (var j = 0; j < circles.length; j++) {
-        var other = circles[j];
+      for (var j = 0; j < this.circles.length; j++) {
+        var other = this.circles[j];
         var d = dist(circle.x, circle.y, other.x, other.y);
         if (d < circle.r + other.r) {
           overlapping = true;
         }
       }
 
-      for (var k = 0; k < circles.length; k++) {
-        fill(255, 0, 150, 100);
-        noStroke();
-        ellipse(circles[i].x, circles[i].y, circles[i].r * 2, circles[i].r * 2);
-      }
-
+      // If not keep it!
       if (!overlapping) {
-        circles.push(circle);
+        this.circles.push(circle);
       }
     }
   }
-  
+
   // gets the string type of the Exercise
   getType() {
     return "Exercise 3";
   }
-  
+
   // draw function
-  draw () {}
-  
+  draw() {
+    // Draw all the circles
+    for (var i = 0; i < this.circles.length; i++) {
+      fill(255, 0, 175, 100);
+      noStroke();
+      ellipse(this.circles[i].x, this.circles[i].y, this.circles[i].r * 2, this.circles[i].r * 2);
+    }
+  }
+
   // touch function
   touch(t) {}
 }
+
+
 
 
 
@@ -197,10 +202,10 @@ function setup() {
 function draw() {
   background(256);
   state.draw();
-  
+
   // deep copy the values in touches
   t = JSON.parse(JSON.stringify(touches));
-  
+
   // perform an action for each touch
   state.touch(t);
 }
