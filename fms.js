@@ -70,13 +70,18 @@ class State {
         this.exercise = new Exercise3();
       }
     }
+    
+    text("Debug",WIDTH/2,HEIGHT/2);
+    
+    // call the touch method on the exercise
+    this.exercise.touch(t);
   }
 }
 
 
 // the state of exercise 1
 // Yuxi
-// line / pinching exercise
+// line pinching exercise
 class Exercise1 {
   
   // gets the string type of the Exercise
@@ -86,11 +91,14 @@ class Exercise1 {
   
   // draw function
   draw() {}
+  
+  // touch function
+  touch(t) {}
 }
 
 
 // the state of exercise 2
-// Yuxi
+// Harrison
 // foot exercise
 class Exercise2 {
   
@@ -163,7 +171,11 @@ class Exercise3 {
     return "Exercise 3";
   }
   
+  // draw function
   draw () {}
+  
+  // touch function
+  touch(t) {}
 }
 
 
