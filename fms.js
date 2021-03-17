@@ -29,20 +29,20 @@ class State {
     // menu bar
     fill('magenta');
     stroke(1);
+
     circle(this.button1.x, this.button1.y, BUTTON_DIAMETER);
     circle(this.button2.x, this.button2.y, BUTTON_DIAMETER);
     circle(this.button3.x, this.button3.y, BUTTON_DIAMETER);
-
 
     // text
     textSize(32);
     textAlign(CENTER, CENTER);
     fill(50);
-    text(this.exercise.getType(), 0, 0, WIDTH, HEIGHT / 10);
-    text('Exercise\n1', this.button1.x, this.button1.y);
-    text('Exercise\n2', this.button2.x, this.button2.y);
-    text('Exercise\n3', this.button3.x, this.button3.y);
-
+    text(this.exercise.getType(),WIDTH/2,HEIGHT/20);
+    text('Exercise\n1',this.button1.x,this.button1.y);
+    text('Exercise\n2',this.button2.x,this.button2.y);
+    text('Exercise\n3',this.button3.x,this.button3.y);
+    
     // draw the exercise
     this.exercise.draw();
   }
@@ -70,22 +70,31 @@ class State {
         this.exercise = new Exercise3();
       }
     }
+    
+    text("Debug",WIDTH/2,HEIGHT/2);
+    
+    // call the touch method on the exercise
+    this.exercise.touch(t);
   }
 }
 
 
 // the state of exercise 1
 // Yuxi
-// line / pinching exercise
+// line pinching exercise
 class Exercise1 {
 
   // gets the string type of the Exercise
   getType() {
     return "Exercise 1";
   }
-
+  
   // draw function
   draw() {}
+  
+  // touch function
+  touch(t) {}
+
 }
 
 
@@ -103,6 +112,7 @@ class Exercise2 {
   getType() {
     return "Exercise 2";
   }
+
 
   draw() {
     fill(this.color);
@@ -157,6 +167,7 @@ class Exercise3 {
     return "Exercise 3";
   }
 
+  // draw function
   draw() {
     // Draw all the circles
     for (var i = 0; i < this.circles.length; i++) {
@@ -165,6 +176,9 @@ class Exercise3 {
       ellipse(this.circles[i].x, this.circles[i].y, this.circles[i].r * 2, this.circles[i].r * 2);
     }
   }
+
+  // touch function
+  touch(t) {}
 }
 
 
