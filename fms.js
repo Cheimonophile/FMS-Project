@@ -137,12 +137,12 @@ class Exercise3 {
   constructor() {
     this.circles = [];
 
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 5; i++) {
       // Pick a random circle
       var circle = {
-        x: random(WIDTH - 0),
+        x: random(WIDTH/10, 8*WIDTH/10),
         y: random(HEIGHT/10, 8*HEIGHT/10),
-        r: random(12, 36)
+        r: random(36, 48)
       };
 
       // Does it overlap any previous circles?
