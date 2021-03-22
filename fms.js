@@ -85,15 +85,36 @@ class State {
 class Exercise1 {
 
   // gets the string type of the Exercise
+  constructor(){
+this.circle1 = {x: 100, y: 100};
+this.circle2 = {x:500,y: 500};
+  }
   getType() {
     return "Exercise 1";
   }
   
   // draw function
-  draw() {}
+  draw() {
+    circle(this.circle1.x,this.circle1.y,100);
+    circle(this.circle2.x,this.circle2.y,100);
+  }
   
   // touch function
-  touch(t) {}
+  touch(t) {
+    var i = 0;
+    for (; i < t.length; i++) {
+    if(dist(this.circle1.x,this.circle1.y,t[i].x,t[i].y) < 50) {
+    this.circle1.x = t[i].x;
+    this.circle1.y = t[i].y;
+    }
+    if(dist(this.circle2.x,this.circle2.y,t[i].x,t[i].y) < 50) {
+    this.circle2.x = t[i].x;
+    this.circle2.y = t[i].y;
+    }
+    }
+    
+  }
+  
 
 }
 
