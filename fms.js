@@ -99,7 +99,7 @@ class Exercise1 {
 
 
 // the state of exercise 2
-// Yuxi
+// Harrison
 // foot exercise
 class Exercise2 {
 
