@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang="en"><head>
+    <script src="p5.js"></script>
+    <script src="p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+    <!-- Experimental Disable Zooming -->
+    <meta name=“viewport” content=“width=device-width, user-scalable=no”>
+    <!-- Experimental Disable Zooming -->
+    <meta name="HandheldFriendly" content="true" />
+  </head>
+  <body>
+    <script src="fms.js"></script>
+    <!-- Experimental Disable Zooming -->
+    <!-- Solution Credit: https://github.com/nonlinear/switches/blob/main/no-zoom.html -->
+    <script>
+      document.addEventListener('gesturestart', function (e) {
+        e.preventDefault();
+      });
+      document.addEventListener('touchstart', function (e) {
+        e.preventDefault();
+      });
+      document.addEventListener('touchmove', function (e) {
+        e.preventDefault();
+      });
+    </script>
+</body></html>
