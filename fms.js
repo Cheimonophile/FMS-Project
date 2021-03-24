@@ -71,8 +71,6 @@ class State {
       }
     }
     
-    text("Debug",WIDTH/2,HEIGHT/2);
-    
     // call the touch method on the exercise
     this.exercise.touch(t);
   }
@@ -186,7 +184,7 @@ class Exercise3 {
 
 
 // state object
-let state = new State();
+let state = null;
 
 
 
@@ -194,6 +192,9 @@ let state = new State();
 // Ben
 function setup() {
   createCanvas(WIDTH, HEIGHT);
+  
+  // init state
+  state = new State();
 }
 
 
