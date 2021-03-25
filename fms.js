@@ -108,11 +108,14 @@ class Exercise1 {
 
   // draw function
   draw() {
+    fill('blue');
     circle(this.circle1.x, this.circle1.y, 100);
     circle(this.circle2.x, this.circle2.y, 100);
     if (this.gamecompleted) {
+      fill(50);
       textSize(32);
-      text("Good Job!", WIDTH / 2, HEIGHT / 2)
+      textAlign(CENTER, CENTER);
+      text("Good Job!", WIDTH / 2, HEIGHT / 2);
     }
   }
 
