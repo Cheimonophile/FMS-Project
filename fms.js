@@ -38,11 +38,11 @@ class State {
     textSize(32);
     textAlign(CENTER, CENTER);
     fill(50);
-    text(this.exercise.getType(),WIDTH/2,HEIGHT/20);
-    text('Exercise\n1',this.button1.x,this.button1.y);
-    text('Exercise\n2',this.button2.x,this.button2.y);
-    text('Exercise\n3',this.button3.x,this.button3.y);
-    
+    text(this.exercise.getType(), WIDTH / 2, HEIGHT / 20);
+    text('Exercise\n1', this.button1.x, this.button1.y);
+    text('Exercise\n2', this.button2.x, this.button2.y);
+    text('Exercise\n3', this.button3.x, this.button3.y);
+
     // draw the exercise
     this.exercise.draw();
   }
@@ -70,7 +70,7 @@ class State {
         this.exercise = new Exercise3();
       }
     }
-    
+
     // call the touch method on the exercise
     this.exercise.touch(t);
   }
@@ -83,54 +83,76 @@ class State {
 class Exercise1 {
 
   // gets the string type of the Exercise
-  constructor(){
-    this.circle1 = {x: 100, y: 200};
-    this.circle2 = {x: WIDTH-100, y: HEIGHT-300};
-    this.circle1origin = {x: this.circle1.x,y: this.circle1.y};
-    this.circle2origin = {x: this.circle2.x,y: this.circle2.y};
-    this.gamecomplited = false;
-   }
+  constructor() {
+    this.circle1 = {
+      x: 100,
+      y: 200
+    };
+    this.circle2 = {
+      x: WIDTH - 100,
+      y: HEIGHT - 300
+    };
+    this.circle1origin = {
+      x: this.circle1.x,
+      y: this.circle1.y
+    };
+    this.circle2origin = {
+      x: this.circle2.x,
+      y: this.circle2.y
+    };
+    this.gamecompleted = false;
+  }
   getType() {
     return "Exercise 1";
   }
-  
+
   // draw function
   draw() {
-    circle(this.circle1.x,this.circle1.y,100);
-    circle(this.circle2.x,this.circle2.y,100);
-    if(this.gamecomplited){
-      text("good job", WIDTH/2, HEIGHT/2)
+    circle(this.circle1.x, this.circle1.y, 100);
+    circle(this.circle2.x, this.circle2.y, 100);
+    if (this.gamecompleted) {
+      text("good job", WIDTH / 2, HEIGHT / 2)
     }
   }
-  
+
   // touch function
   touch(t) {
     var circle1touched = false;
     var circle2touched = false;
     var i = 0;
+    
     for (; i < t.length; i++) {
-    if(dist(this.circle1.x,this.circle1.y,t[i].x,t[i].y) < 50) {
-    circle1touched = true;
-    this.circle1.x = t[i].x;
-    this.circle1.y = t[i].y;
+      if (dist(this.circle1.x, this.circle1.y, t[i].x, t[i].y) < 50) {
+        circle1touched = true;
+        this.circle1.x = t[i].x;
+        this.circle1.y = t[i].y;
+      }
+      if (dist(this.circle2.x, this.circle2.y, t[i].x, t[i].y) < 50) {
+        circle2touched = true;
+        this.circle2.x = t[i].x;
+        this.circle2.y = t[i].y;
+      }
     }
-    if(dist(this.circle2.x,this.circle2.y,t[i].x,t[i].y) < 50) {
-    circle2touched = true;
-    this.circle2.x = t[i].x;
-    this.circle2.y = t[i].y;
+    
+    if (!circle1touched) {
+      this.circle1 = {
+        x: this.circle1origin.x,
+        y: this.circle1origin.y
+      };
     }
-                              }
-    if(!circle1touched) {
-    this.circle1 = {x: this.circle1origin.x, y:this.circle1origin.y};
+    
+    if (!circle2touched) {
+      this.circle2 = {
+        x: this.circle2origin.x,
+        y: this.circle2origin.y
+      };
     }
-    if(!circle2touched) {
-    this.circle2 = {x: this.circle2origin.x, y:this.circle2origin.y};
-    }
-    if(dist(this.circle1.x,this.circle1.y,this.circle2.x,this.circle2.y)<100){
-      this.gamecomplited = true;
+    
+    if (dist(this.circle1.x, this.circle1.y, this.circle2.x, this.circle2.y) < 100) {
+      this.gamecompleted = true;
     }
   }
-  
+
 
 }
 
@@ -178,7 +200,7 @@ class Exercise3 {
       // Pick a random circle
       var circle = {
         x: random(WIDTH - 0),
-        y: random(HEIGHT/10, 8*HEIGHT/10),
+        y: random(HEIGHT / 10, 8 * HEIGHT / 10),
         r: random(12, 36)
       };
 
@@ -231,7 +253,7 @@ let state = null;
 // Ben
 function setup() {
   createCanvas(WIDTH, HEIGHT);
-  
+
   // init state
   state = new State();
 }
