@@ -83,15 +83,54 @@ class State {
 class Exercise1 {
 
   // gets the string type of the Exercise
+  constructor(){
+    this.circle1 = {x: 100, y: 200};
+    this.circle2 = {x: WIDTH-100, y: HEIGHT-300};
+    this.circle1origin = {x: this.circle1.x,y: this.circle1.y};
+    this.circle2origin = {x: this.circle2.x,y: this.circle2.y};
+    this.gamecomplited = false;
+   }
   getType() {
     return "Exercise 1";
   }
   
   // draw function
-  draw() {}
+  draw() {
+    circle(this.circle1.x,this.circle1.y,100);
+    circle(this.circle2.x,this.circle2.y,100);
+    if(this.gamecomplited){
+      text("good job", WIDTH/2, HEIGHT/2)
+    }
+  }
   
   // touch function
-  touch(t) {}
+  touch(t) {
+    var circle1touched = false;
+    var circle2touched = false;
+    var i = 0;
+    for (; i < t.length; i++) {
+    if(dist(this.circle1.x,this.circle1.y,t[i].x,t[i].y) < 50) {
+    circle1touched = true;
+    this.circle1.x = t[i].x;
+    this.circle1.y = t[i].y;
+    }
+    if(dist(this.circle2.x,this.circle2.y,t[i].x,t[i].y) < 50) {
+    circle2touched = true;
+    this.circle2.x = t[i].x;
+    this.circle2.y = t[i].y;
+    }
+                              }
+    if(!circle1touched) {
+    this.circle1 = {x: this.circle1origin.x, y:this.circle1origin.y};
+    }
+    if(!circle2touched) {
+    this.circle2 = {x: this.circle2origin.x, y:this.circle2origin.y};
+    }
+    if(dist(this.circle1.x,this.circle1.y,this.circle2.x,this.circle2.y)<100){
+      this.gamecomplited = true;
+    }
+  }
+  
 
 }
 
