@@ -1,6 +1,6 @@
 // global constants
-const WIDTH = 640;
-const HEIGHT = 1136;
+var WIDTH = 640;
+var HEIGHT = 1136;
 const BUTTON_DIAMETER = 140;
 
 // Point Class for storing points
@@ -256,6 +256,8 @@ let state = null;
 // setup
 // Ben
 function setup() {
+  WIDTH = windowWidth;
+  HEIGHT = windowHeight;
   createCanvas(WIDTH, HEIGHT);
 
   // init state
