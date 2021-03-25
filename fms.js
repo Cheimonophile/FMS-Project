@@ -71,7 +71,6 @@ class State {
       }
     }
     
-    text("Debug",WIDTH/2,HEIGHT/2);
     
     // call the touch method on the exercise
     this.exercise.touch(t);
@@ -90,6 +89,7 @@ class Exercise1 {
     this.circle2 = {x: WIDTH-100, y: HEIGHT-300};
     this.circle1origin = {x: this.circle1.x,y: this.circle1.y};
     this.circle2origin = {x: this.circle2.x,y: this.circle2.y};
+    this.gamecomplited = false;
    }
   getType() {
     return "Exercise 1";
@@ -99,6 +99,9 @@ class Exercise1 {
   draw() {
     circle(this.circle1.x,this.circle1.y,100);
     circle(this.circle2.x,this.circle2.y,100);
+    if(this.gamecomplited){
+      text("good job", WIDTH/2, HEIGHT/2)
+    }
   }
   
   // touch function
@@ -123,6 +126,9 @@ class Exercise1 {
     }
     if(!circle2touched) {
     this.circle2 = {x: this.circle2origin.x, y:this.circle2origin.y};
+    }
+    if(dist(this.circle1.x,this.circle1.y,this.circle2.x,this.circle2.y)<100){
+      this.gamecomplited = true;
     }
   }
   
