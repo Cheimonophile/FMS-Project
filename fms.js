@@ -9,9 +9,10 @@ class State {
 
   constructor() {
     this.exercise = new Exercise1();
-    this.button1 = {x:1 * WIDTH / 6, y: HEIGHT - 100};
-    this.button2 = {x:3 * WIDTH / 6, y: HEIGHT - 100};
-    this.button3 = {x:5 * WIDTH / 6, y: HEIGHT - 100};
+    this.button_size = WIDTH / 6;
+    this.button1 = {x:1 * WIDTH / 6, y: HEIGHT - (1 * WIDTH / 6)};
+    this.button2 = {x:3 * WIDTH / 6, y: HEIGHT - (1 * WIDTH / 6)};
+    this.button3 = {x:5 * WIDTH / 6, y: HEIGHT - (1 * WIDTH / 6)};
   }
 
   draw() {
@@ -20,9 +21,9 @@ class State {
     fill('magenta');
     stroke(1);
 
-    circle(this.button1.x, this.button1.y, BUTTON_DIAMETER);
-    circle(this.button2.x, this.button2.y, BUTTON_DIAMETER);
-    circle(this.button3.x, this.button3.y, BUTTON_DIAMETER);
+    circle(this.button1.x, this.button1.y, this.button_size);
+    circle(this.button2.x, this.button2.y, this.button_size);
+    circle(this.button3.x, this.button3.y, this.button_size);
 
     // text
     textSize(24);
@@ -46,17 +47,17 @@ class State {
       let y = t[i].y;
 
       // check if the press is near the first button
-      if (dist(x, y, this.button1.x, this.button1.y) < BUTTON_DIAMETER / 2) {
+      if (dist(x, y, this.button1.x, this.button1.y) < this.button_size / 2) {
         this.exercise = new Exercise1();
       }
 
       // check if the press is near the first button
-      if (dist(x, y, this.button2.x, this.button2.y) < BUTTON_DIAMETER / 2) {
+      if (dist(x, y, this.button2.x, this.button2.y) < this.button_size / 2) {
         this.exercise = new Exercise2();
       }
 
       // check if the press is near the first button
-      if (dist(x, y, this.button3.x, this.button3.y) < BUTTON_DIAMETER / 2) {
+      if (dist(x, y, this.button3.x, this.button3.y) < this.button_size / 2) {
         this.exercise = new Exercise3();
       }
     }
@@ -75,12 +76,12 @@ class Exercise1 {
   // gets the string type of the Exercise
   constructor() {
     this.circle1 = {
-      x: 100,
-      y: 200
+      x: WIDTH/6,
+      y: 1.5*WIDTH/6,
     };
     this.circle2 = {
-      x: WIDTH - 100,
-      y: HEIGHT - 300
+      x: WIDTH - (WIDTH/6),
+      y: HEIGHT - (2.5*WIDTH/6),
     };
     this.circle1origin = {
       x: this.circle1.x,
@@ -91,6 +92,7 @@ class Exercise1 {
       y: this.circle2.y
     };
     this.gamecompleted = false;
+    this.circle_size = 1.2 * WIDTH / 6;
   }
   getType() {
     return "Exercise 1";
@@ -99,8 +101,8 @@ class Exercise1 {
   // draw function
   draw() {
     fill('blue');
-    circle(this.circle1.x, this.circle1.y, 100);
-    circle(this.circle2.x, this.circle2.y, 100);
+    circle(this.circle1.x, this.circle1.y, this.circle_size);
+    circle(this.circle2.x, this.circle2.y, this.circle_size);
     if (this.gamecompleted) {
       fill(50);
       textSize(32);
@@ -116,12 +118,12 @@ class Exercise1 {
     var i = 0;
     
     for (; i < t.length; i++) {
-      if (dist(this.circle1.x, this.circle1.y, t[i].x, t[i].y) < 50) {
+      if (dist(this.circle1.x, this.circle1.y, t[i].x, t[i].y) < this.circle_size) {
         circle1touched = true;
         this.circle1.x = t[i].x;
         this.circle1.y = t[i].y;
       }
-      if (dist(this.circle2.x, this.circle2.y, t[i].x, t[i].y) < 50) {
+      if (dist(this.circle2.x, this.circle2.y, t[i].x, t[i].y) < this.circle_size) {
         circle2touched = true;
         this.circle2.x = t[i].x;
         this.circle2.y = t[i].y;
