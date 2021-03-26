@@ -71,7 +71,6 @@ class State {
       }
     }
 
-    text("Debug", WIDTH / 2, HEIGHT / 2);
     // call the touch method on the exercise
     this.exercise.touch(t);
   }
