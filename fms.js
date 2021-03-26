@@ -3,25 +3,15 @@ var WIDTH = 640;
 var HEIGHT = 1136;
 const BUTTON_DIAMETER = 140;
 
-// Point Class for storing points
-class Point {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-}
-
-
-
 // Class that keeps track of the state of the app
 // Ben
 class State {
 
   constructor() {
     this.exercise = new Exercise1();
-    this.button1 = new Point(1 * WIDTH / 6, HEIGHT - 100);
-    this.button2 = new Point(3 * WIDTH / 6, HEIGHT - 100);
-    this.button3 = new Point(5 * WIDTH / 6, HEIGHT - 100);
+    this.button1 = {x:1 * WIDTH / 6, y: HEIGHT - 100};
+    this.button2 = {x:3 * WIDTH / 6, y: HEIGHT - 100};
+    this.button3 = {x:5 * WIDTH / 6, y: HEIGHT - 100};
   }
 
   draw() {
