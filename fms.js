@@ -1,6 +1,6 @@
 // global constants
-const WIDTH = 640;
-const HEIGHT = 1136;
+var WIDTH = 640;
+var HEIGHT = 1136;
 const BUTTON_DIAMETER = 140;
 
 // Point Class for storing points
@@ -35,7 +35,7 @@ class State {
     circle(this.button3.x, this.button3.y, BUTTON_DIAMETER);
 
     // text
-    textSize(32);
+    textSize(24);
     textAlign(CENTER, CENTER);
     fill(50);
     text(this.exercise.getType(), WIDTH / 2, HEIGHT / 20);
@@ -72,7 +72,6 @@ class State {
     }
 
     text("Debug", WIDTH / 2, HEIGHT / 2);
-
     // call the touch method on the exercise
     this.exercise.touch(t);
   }
@@ -85,21 +84,86 @@ class State {
 class Exercise1 {
 
   // gets the string type of the Exercise
+  constructor() {
+    this.circle1 = {
+      x: 100,
+      y: 200
+    };
+    this.circle2 = {
+      x: WIDTH - 100,
+      y: HEIGHT - 300
+    };
+    this.circle1origin = {
+      x: this.circle1.x,
+      y: this.circle1.y
+    };
+    this.circle2origin = {
+      x: this.circle2.x,
+      y: this.circle2.y
+    };
+    this.gamecompleted = false;
+  }
   getType() {
     return "Exercise 1";
   }
 
   // draw function
-  draw() {}
+  draw() {
+    fill('blue');
+    circle(this.circle1.x, this.circle1.y, 100);
+    circle(this.circle2.x, this.circle2.y, 100);
+    if (this.gamecompleted) {
+      fill(50);
+      textSize(32);
+      textAlign(CENTER, CENTER);
+      text("Good Job!", WIDTH / 2, HEIGHT / 2);
+    }
+  }
 
   // touch function
-  touch(t) {}
+  touch(t) {
+    var circle1touched = false;
+    var circle2touched = false;
+    var i = 0;
+    
+    for (; i < t.length; i++) {
+      if (dist(this.circle1.x, this.circle1.y, t[i].x, t[i].y) < 50) {
+        circle1touched = true;
+        this.circle1.x = t[i].x;
+        this.circle1.y = t[i].y;
+      }
+      if (dist(this.circle2.x, this.circle2.y, t[i].x, t[i].y) < 50) {
+        circle2touched = true;
+        this.circle2.x = t[i].x;
+        this.circle2.y = t[i].y;
+      }
+    }
+    
+    if (!circle1touched) {
+      this.circle1 = {
+        x: this.circle1origin.x,
+        y: this.circle1origin.y
+      };
+    }
+    
+    if (!circle2touched) {
+      this.circle2 = {
+        x: this.circle2origin.x,
+        y: this.circle2origin.y
+      };
+    }
+    
+    if (dist(this.circle1.x, this.circle1.y, this.circle2.x, this.circle2.y) < 100) {
+      this.gamecompleted = true;
+    }
+  }
+
 
 }
 
 
 // the state of exercise 2
-// Yuxi
+// Harrison
 // foot exercise
 class Exercise2 {
 
@@ -215,14 +279,19 @@ class Exercise3 {
 
 
 // state object
-let state = new State();
+let state = null;
 
 
 
 // setup
 // Ben
 function setup() {
+  WIDTH = windowWidth;
+  HEIGHT = windowHeight;
   createCanvas(WIDTH, HEIGHT);
+
+  // init state
+  state = new State();
 }
 
 
