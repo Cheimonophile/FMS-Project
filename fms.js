@@ -26,7 +26,7 @@ class State {
     circle(this.button3.x, this.button3.y, this.button_size);
 
     // text
-    textSize(24);
+    textSize(32);
     textAlign(CENTER, CENTER);
     fill(50);
     text(this.exercise.getType(), WIDTH / 2, HEIGHT / 20);
@@ -105,7 +105,7 @@ class Exercise1 {
     circle(this.circle2.x, this.circle2.y, this.circle_size);
     if (this.gamecompleted) {
       fill(50);
-      textSize(32);
+      textSize(64);
       textAlign(CENTER, CENTER);
       text("Good Job!", WIDTH / 2, HEIGHT / 2);
     }
