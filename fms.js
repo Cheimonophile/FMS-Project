@@ -160,7 +160,7 @@ class Exercise2 {
 
   // constructor
   constructor() {
-    this.color = 255;
+    
   }
 
   // gets the string type of the Exercise
@@ -170,19 +170,33 @@ class Exercise2 {
 
 
   draw() {
-    fill(this.color);
     noStroke();
-    circle(160, 160, 20)
+    // x = left/right, y = up/down for ellipse 
+    // w = width, h = height
+    
+  
+    
+    ellipse(150, 500, 100, 140); // main foot 
+    
+    
+    
+    ellipse(500, 500, 100, 140); // main foot
+    
+  let b = color(0, 0, 0);
+  fill(b);
+  noStroke();
+  text('Steps', 300, 150);
+    
   }
 
 
   touch(t) {
-    this.color = this.color - 4;
-    if (this.color < 0) {
-      this.color = 255;
+    // this.color = this.color - 4;
+     //if (this.color < 0) {
+       
     }
   }
-}
+
 
 
 // the state of exercise 3
