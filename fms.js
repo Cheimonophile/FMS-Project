@@ -38,11 +38,11 @@ class State {
     textSize(32);
     textAlign(CENTER, CENTER);
     fill(50);
-    text(this.exercise.getType(),WIDTH/2,HEIGHT/20);
-    text('Exercise\n1',this.button1.x,this.button1.y);
-    text('Exercise\n2',this.button2.x,this.button2.y);
-    text('Exercise\n3',this.button3.x,this.button3.y);
-    
+    text(this.exercise.getType(), WIDTH / 2, HEIGHT / 20);
+    text('Exercise\n1', this.button1.x, this.button1.y);
+    text('Exercise\n2', this.button2.x, this.button2.y);
+    text('Exercise\n3', this.button3.x, this.button3.y);
+
     // draw the exercise
     this.exercise.draw();
   }
@@ -70,9 +70,9 @@ class State {
         this.exercise = new Exercise3();
       }
     }
-    
-    text("Debug",WIDTH/2,HEIGHT/2);
-    
+
+    text("Debug", WIDTH / 2, HEIGHT / 2);
+
     // call the touch method on the exercise
     this.exercise.touch(t);
   }
@@ -88,10 +88,10 @@ class Exercise1 {
   getType() {
     return "Exercise 1";
   }
-  
+
   // draw function
   draw() {}
-  
+
   // touch function
   touch(t) {}
 
@@ -135,13 +135,14 @@ class Exercise2 {
 class Exercise3 {
   // this function would randomly generate circles which would mimic doorknob
   constructor() {
+    // random location for circles
     this.circles = [];
 
     for (var i = 0; i < 5; i++) {
       // Pick a random circle
       var circle = {
-        x: random(WIDTH/10, 8*WIDTH/10),
-        y: random(HEIGHT/10, 8*HEIGHT/10),
+        x: random(WIDTH / 10, 8 * WIDTH / 10),
+        y: random(HEIGHT / 8, 6 * HEIGHT / 8),
         r: random(36, 48)
       };
 
@@ -160,6 +161,9 @@ class Exercise3 {
         this.circles.push(circle);
       }
     }
+
+    // boolean expression that declares the exercise as not complete 
+    this.gameCompletion = false;
   }
 
   // gets the string type of the Exercise
@@ -174,11 +178,36 @@ class Exercise3 {
       fill(255, 0, 175, 100);
       noStroke();
       ellipse(this.circles[i].x, this.circles[i].y, this.circles[i].r * 2, this.circles[i].r * 2);
+
+      if (this.gameCompletion == true) {
+        fill(255, 100, 100);
+        textAlign(CENTER, CENTER);
+        textSize(45);
+        textFont("Kristi");
+        text('GAME\nOVER', WIDTH / 2, HEIGHT / 2);
+      }
     }
   }
 
   // touch function
-  touch(t) {}
+  touch(t) {
+    var j = 0;
+
+    // check if the press is near the circles 
+    for (; j < this.circles.length; j++) {
+      var touch = false;
+
+      var i = 0;
+      for (; i < t.length; i++) {
+        if (dist(this.circles[j].x, this.circles[j].y, t[i].x, t[i].y) < (this.circles[j].r / 2)) {
+          touch = true;
+        }
+      }
+      if (touch == true) {
+        this.gameCompletion = true;
+      }
+    }
+  }
 }
 
 
