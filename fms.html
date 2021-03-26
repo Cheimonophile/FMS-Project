@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang="en"><head>
+    <script src="p5.js"></script>
+    <script src="p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+    <!-- Experimental Disable Zooming -->
+    <meta name="viewport" content="user-scalable=no">
+
+    <style>
+      html,
+      body {
+        position: fixed;
+        overflow: hidden;
+      }
+      </style>
+      
+  </head>
+  <body>
+    <script src="fms.js"></script>
+    <script>
+      document.addEventListener('gesturestart', function (e) {
+        e.preventDefault();
+      });
+      document.addEventListener('touchstart', function (e) {
+        e.preventDefault();
+      });
+      document.addEventListener('touchmove', function (e) {
+        e.preventDefault();
+      });
+    </script>
+
+</body></html>

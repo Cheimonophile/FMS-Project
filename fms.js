@@ -1,17 +1,7 @@
 // global constants
-const WIDTH = 640;
-const HEIGHT = 1136;
+var WIDTH = 640;
+var HEIGHT = 1136;
 const BUTTON_DIAMETER = 140;
-
-// Point Class for storing points
-class Point {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-}
-
-
 
 // Class that keeps track of the state of the app
 // Ben
@@ -19,9 +9,10 @@ class State {
 
   constructor() {
     this.exercise = new Exercise1();
-    this.button1 = new Point(1 * WIDTH / 6, HEIGHT - 100);
-    this.button2 = new Point(3 * WIDTH / 6, HEIGHT - 100);
-    this.button3 = new Point(5 * WIDTH / 6, HEIGHT - 100);
+    this.button_size = WIDTH / 6;
+    this.button1 = {x:1 * WIDTH / 6, y: HEIGHT - (1 * WIDTH / 6)};
+    this.button2 = {x:3 * WIDTH / 6, y: HEIGHT - (1 * WIDTH / 6)};
+    this.button3 = {x:5 * WIDTH / 6, y: HEIGHT - (1 * WIDTH / 6)};
   }
 
   draw() {
@@ -30,19 +21,19 @@ class State {
     fill('magenta');
     stroke(1);
 
-    circle(this.button1.x, this.button1.y, BUTTON_DIAMETER);
-    circle(this.button2.x, this.button2.y, BUTTON_DIAMETER);
-    circle(this.button3.x, this.button3.y, BUTTON_DIAMETER);
+    circle(this.button1.x, this.button1.y, this.button_size);
+    circle(this.button2.x, this.button2.y, this.button_size);
+    circle(this.button3.x, this.button3.y, this.button_size);
 
     // text
     textSize(32);
     textAlign(CENTER, CENTER);
     fill(50);
-    text(this.exercise.getType(),WIDTH/2,HEIGHT/20);
-    text('Exercise\n1',this.button1.x,this.button1.y);
-    text('Exercise\n2',this.button2.x,this.button2.y);
-    text('Exercise\n3',this.button3.x,this.button3.y);
-    
+    text(this.exercise.getType(), WIDTH / 2, HEIGHT / 20);
+    text('Exercise\n1', this.button1.x, this.button1.y);
+    text('Exercise\n2', this.button2.x, this.button2.y);
+    text('Exercise\n3', this.button3.x, this.button3.y);
+
     // draw the exercise
     this.exercise.draw();
   }
@@ -56,23 +47,21 @@ class State {
       let y = t[i].y;
 
       // check if the press is near the first button
-      if (dist(x, y, this.button1.x, this.button1.y) < BUTTON_DIAMETER / 2) {
+      if (dist(x, y, this.button1.x, this.button1.y) < this.button_size / 2) {
         this.exercise = new Exercise1();
       }
 
       // check if the press is near the first button
-      if (dist(x, y, this.button2.x, this.button2.y) < BUTTON_DIAMETER / 2) {
+      if (dist(x, y, this.button2.x, this.button2.y) < this.button_size / 2) {
         this.exercise = new Exercise2();
       }
 
       // check if the press is near the first button
-      if (dist(x, y, this.button3.x, this.button3.y) < BUTTON_DIAMETER / 2) {
+      if (dist(x, y, this.button3.x, this.button3.y) < this.button_size / 2) {
         this.exercise = new Exercise3();
       }
     }
-    
-    
-    
+
     // call the touch method on the exercise
     this.exercise.touch(t);
   }
@@ -85,15 +74,81 @@ class State {
 class Exercise1 {
 
   // gets the string type of the Exercise
+  constructor() {
+    this.circle1 = {
+      x: WIDTH/6,
+      y: 1.5*WIDTH/6,
+    };
+    this.circle2 = {
+      x: WIDTH - (WIDTH/6),
+      y: HEIGHT - (2.5*WIDTH/6),
+    };
+    this.circle1origin = {
+      x: this.circle1.x,
+      y: this.circle1.y
+    };
+    this.circle2origin = {
+      x: this.circle2.x,
+      y: this.circle2.y
+    };
+    this.gamecompleted = false;
+    this.circle_size = 1.2 * WIDTH / 6;
+  }
   getType() {
     return "Exercise 1";
   }
-  
+
   // draw function
-  draw() {}
-  
+  draw() {
+    fill('blue');
+    circle(this.circle1.x, this.circle1.y, this.circle_size);
+    circle(this.circle2.x, this.circle2.y, this.circle_size);
+    if (this.gamecompleted) {
+      fill(50);
+      textSize(64);
+      textAlign(CENTER, CENTER);
+      text("Good Job!", WIDTH / 2, HEIGHT / 2);
+    }
+  }
+
   // touch function
-  touch(t) {}
+  touch(t) {
+    var circle1touched = false;
+    var circle2touched = false;
+    var i = 0;
+    
+    for (; i < t.length; i++) {
+      if (dist(this.circle1.x, this.circle1.y, t[i].x, t[i].y) < this.circle_size) {
+        circle1touched = true;
+        this.circle1.x = t[i].x;
+        this.circle1.y = t[i].y;
+      }
+      if (dist(this.circle2.x, this.circle2.y, t[i].x, t[i].y) < this.circle_size) {
+        circle2touched = true;
+        this.circle2.x = t[i].x;
+        this.circle2.y = t[i].y;
+      }
+    }
+    
+    if (!circle1touched) {
+      this.circle1 = {
+        x: this.circle1origin.x,
+        y: this.circle1origin.y
+      };
+    }
+    
+    if (!circle2touched) {
+      this.circle2 = {
+        x: this.circle2origin.x,
+        y: this.circle2origin.y
+      };
+    }
+    
+    if (dist(this.circle1.x, this.circle1.y, this.circle2.x, this.circle2.y) < 100) {
+      this.gamecompleted = true;
+    }
+  }
+
 
 }
 
@@ -149,14 +204,15 @@ class Exercise2 {
 class Exercise3 {
   // this function would randomly generate circles which would mimic doorknob
   constructor() {
+    // random location for circles
     this.circles = [];
 
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 5; i++) {
       // Pick a random circle
       var circle = {
-        x: random(WIDTH - 0),
-        y: random(HEIGHT/10, 8*HEIGHT/10),
-        r: random(12, 36)
+        x: random(WIDTH / 10, 8 * WIDTH / 10),
+        y: random(HEIGHT / 8, 6 * HEIGHT / 8),
+        r: random(36, 48)
       };
 
       // Does it overlap any previous circles?
@@ -174,6 +230,9 @@ class Exercise3 {
         this.circles.push(circle);
       }
     }
+
+    // boolean expression that declares the exercise as not complete 
+    this.gameCompletion = false;
   }
 
   // gets the string type of the Exercise
@@ -188,11 +247,36 @@ class Exercise3 {
       fill(255, 0, 175, 100);
       noStroke();
       ellipse(this.circles[i].x, this.circles[i].y, this.circles[i].r * 2, this.circles[i].r * 2);
+
+      if (this.gameCompletion == true) {
+        fill(255, 100, 100);
+        textAlign(CENTER, CENTER);
+        textSize(45);
+        textFont("Kristi");
+        text('GAME\nOVER', WIDTH / 2, HEIGHT / 2);
+      }
     }
   }
 
   // touch function
-  touch(t) {}
+  touch(t) {
+    var j = 0;
+
+    // check if the press is near the circles 
+    for (; j < this.circles.length; j++) {
+      var touch = false;
+
+      var i = 0;
+      for (; i < t.length; i++) {
+        if (dist(this.circles[j].x, this.circles[j].y, t[i].x, t[i].y) < (this.circles[j].r / 2)) {
+          touch = true;
+        }
+      }
+      if (touch == true) {
+        this.gameCompletion = true;
+      }
+    }
+  }
 }
 
 
@@ -200,14 +284,19 @@ class Exercise3 {
 
 
 // state object
-let state = new State();
+let state = null;
 
 
 
 // setup
 // Ben
 function setup() {
+  WIDTH = windowWidth;
+  HEIGHT = windowHeight;
   createCanvas(WIDTH, HEIGHT);
+
+  // init state
+  state = new State();
 }
 
 
