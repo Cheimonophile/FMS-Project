@@ -71,6 +71,7 @@ class State {
       }
     }
 
+    text("Debug", WIDTH / 2, HEIGHT / 2);
     // call the touch method on the exercise
     this.exercise.touch(t);
   }
@@ -198,14 +199,15 @@ class Exercise2 {
 class Exercise3 {
   // this function would randomly generate circles which would mimic doorknob
   constructor() {
+    // random location for circles
     this.circles = [];
 
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 5; i++) {
       // Pick a random circle
       var circle = {
-        x: random(WIDTH - 0),
-        y: random(HEIGHT / 10, 8 * HEIGHT / 10),
-        r: random(12, 36)
+        x: random(WIDTH / 10, 8 * WIDTH / 10),
+        y: random(HEIGHT / 8, 6 * HEIGHT / 8),
+        r: random(36, 48)
       };
 
       // Does it overlap any previous circles?
@@ -223,6 +225,9 @@ class Exercise3 {
         this.circles.push(circle);
       }
     }
+
+    // boolean expression that declares the exercise as not complete 
+    this.gameCompletion = false;
   }
 
   // gets the string type of the Exercise
@@ -237,11 +242,36 @@ class Exercise3 {
       fill(255, 0, 175, 100);
       noStroke();
       ellipse(this.circles[i].x, this.circles[i].y, this.circles[i].r * 2, this.circles[i].r * 2);
+
+      if (this.gameCompletion == true) {
+        fill(255, 100, 100);
+        textAlign(CENTER, CENTER);
+        textSize(45);
+        textFont("Kristi");
+        text('GAME\nOVER', WIDTH / 2, HEIGHT / 2);
+      }
     }
   }
 
   // touch function
-  touch(t) {}
+  touch(t) {
+    var j = 0;
+
+    // check if the press is near the circles 
+    for (; j < this.circles.length; j++) {
+      var touch = false;
+
+      var i = 0;
+      for (; i < t.length; i++) {
+        if (dist(this.circles[j].x, this.circles[j].y, t[i].x, t[i].y) < (this.circles[j].r / 2)) {
+          touch = true;
+        }
+      }
+      if (touch == true) {
+        this.gameCompletion = true;
+      }
+    }
+  }
 }
 
 
