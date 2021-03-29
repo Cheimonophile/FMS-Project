@@ -221,7 +221,7 @@ class Exercise3 {
       var circle = {
         x: random(WIDTH / 10, 8 * WIDTH / 10),
         y: random(HEIGHT / 8, 6 * HEIGHT / 8),
-        r: random(72, 84)
+        r: random(96, 108)
       };
 
       // Does it overlap any previous circles?
