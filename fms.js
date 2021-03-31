@@ -263,7 +263,7 @@ class Exercise3 {
         textAlign(CENTER, CENTER);
         textSize(60);
         textFont("Kristi");
-        text('GAME\nOVER', WIDTH / 2, HEIGHT / 2);
+        text('GOOD\nJOB!', WIDTH / 2, HEIGHT / 2);
       }
     }
   }
