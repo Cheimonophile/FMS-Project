@@ -213,6 +213,7 @@ class Exercise2 {
 
 
 
+
     circle(this.elipse1.x, this.elipse1.y, this.diameter); // main foot 
 
 
@@ -234,9 +235,6 @@ class Exercise2 {
       text('Game Over', WIDTH/2, HEIGHT/2);
       
     }
-    
-    
-    
 
   }
 
@@ -302,12 +300,12 @@ class Exercise3 {
     // random location for circles
     this.circles = [];
 
-    for (var i = 0; i < 5; i++) {
+    while (this.circles.length < 3) {
       // Pick a random circle
       var circle = {
         x: random(WIDTH / 10, 8 * WIDTH / 10),
         y: random(HEIGHT / 8, 6 * HEIGHT / 8),
-        r: random(36, 48)
+        r: random(96, 108)
       };
 
       // Does it overlap any previous circles?
@@ -328,6 +326,7 @@ class Exercise3 {
 
     // boolean expression that declares the exercise as not complete 
     this.gameCompletion = false;
+    // 
   }
 
   // gets the string type of the Exercise
@@ -339,16 +338,16 @@ class Exercise3 {
   draw() {
     // Draw all the circles
     for (var i = 0; i < this.circles.length; i++) {
-      fill(255, 0, 175, 100);
+      fill(255, 210, 247);
       noStroke();
       ellipse(this.circles[i].x, this.circles[i].y, this.circles[i].r * 2, this.circles[i].r * 2);
 
       if (this.gameCompletion == true) {
         fill(255, 100, 100);
         textAlign(CENTER, CENTER);
-        textSize(45);
+        textSize(60);
         textFont("Kristi");
-        text('GAME\nOVER', WIDTH / 2, HEIGHT / 2);
+        text('GOOD\nJOB!', WIDTH / 2, HEIGHT / 2);
       }
     }
   }
@@ -356,6 +355,7 @@ class Exercise3 {
   // touch function
   touch(t) {
     var j = 0;
+    var secondCounter = 0;
 
     // check if the press is near the circles 
     for (; j < this.circles.length; j++) {
@@ -364,13 +364,18 @@ class Exercise3 {
       var i = 0;
       for (; i < t.length; i++) {
         if (dist(this.circles[j].x, this.circles[j].y, t[i].x, t[i].y) < (this.circles[j].r / 2)) {
-          touch = true;
+          secondCounter++;
+          fill(218, 255, 210);
+          circle(this.circles[j].x, this.circles[j].y, this.circles[j].r * 2);
         }
       }
-      if (touch == true) {
+      if (secondCounter == 3) {
         this.gameCompletion = true;
       }
     }
+    fill(50);
+    textSize(32);
+    text("Circles pressed: " + secondCounter, WIDTH / 2, 2 * HEIGHT / 25);
   }
 }
 
