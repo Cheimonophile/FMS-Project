@@ -8,7 +8,7 @@ const BUTTON_DIAMETER = 140;
 class State {
 
   constructor() {
-    this.exercise = new Exercise1();
+    this.exercise = new Exercise2();
     this.button_size = WIDTH / 6;
     this.button1 = {
       x: 1 * WIDTH / 6,
@@ -169,7 +169,35 @@ class Exercise2 {
 
   // constructor
   constructor() {
-
+    
+    // elipse position initialization
+    this.elipse1 = {
+      x: WIDTH/4,
+      y: 7*HEIGHT/10
+    }
+    this.elipse2 = {
+      x: 3*WIDTH/4,
+      y: 7*HEIGHT/10
+    }
+    
+    
+    // circle for balance point
+    this.balancePoint = {
+      loc: WIDTH/2,
+      height: HEIGHT/4,
+      left: true,
+      speed: 10
+      
+      
+      
+    }
+    // score counter track
+    this.scoreCounter = 0;
+    
+    this.gameLost = false;
+    
+    // foot diameter
+    this.diameter = 200;
   }
 
   // gets the string type of the Exercise
@@ -185,28 +213,84 @@ class Exercise2 {
 
 
 
-    ellipse(150, 500, 100, 140); // main foot 
+
+    circle(this.elipse1.x, this.elipse1.y, this.diameter); // main foot 
 
 
 
-    ellipse(500, 500, 100, 140); // main foot
+    circle(this.elipse2.x, this.elipse2.y, this.diameter); // main foot
 
+    
+    circle(this.balancePoint.loc, this.balancePoint.height, this.diameter/2);
+    
+    
     let b = color(0, 0, 0);
     fill(b);
     noStroke();
-    text('Steps', 300, 150);
+    text('Steps: ' + this.scoreCounter, WIDTH/2, 2*HEIGHT/20);
+  
+    if(this.gameLost){
+      
+      
+      text('Game Over', WIDTH/2, HEIGHT/2);
+      
+    }
 
   }
 
 
   touch(t) {
-    // this.color = this.color - 4;
-    //if (this.color < 0) {
-
+    
+    // is there a touch point on either elipse
+    
+    let i = 0;
+    for( ;i < t.length; i++) {
+      
+      // check if on elipse 1
+      if(dist(t[i].x,t[i].y,this.elipse1.x,this.elipse1.y) < this.diameter/2) {
+        
+        
+        if(this.balancePoint.left && abs(this.balancePoint.loc - WIDTH/2) > 50 ){
+          this.balancePoint.loc = WIDTH/2;
+          this.balancePoint.left = random([true, false]);
+          this.scoreCounter+= 1;
+        }
+      }
+      
+      
+      // check if on elipse 2
+      if(dist(t[i].x,t[i].y,this.elipse2.x,this.elipse2.y) < this.diameter/2) {
+        
+        
+        if(!this.balancePoint.left && abs(this.balancePoint.loc - WIDTH/2) > 50){
+          this.balancePoint.loc = WIDTH/2;
+          this.balancePoint.left = random([true, false]);
+          this.scoreCounter+= 1;
+        }
+      }
+      
+      
+      
+    }
+    if(this.balancePoint.left){
+      this.balancePoint.loc = this.balancePoint.loc - this.balancePoint.speed
+    }
+    
+    if(!this.balancePoint.left){
+      this.balancePoint.loc = this.balancePoint.loc + this.balancePoint.speed
+    }
+       
+       if(this.balancePoint.loc < 0 || this.balancePoint.loc > WIDTH){
+         
+         this.gameLost = true;
+         this.balancePoint.loc = WIDTH/2;
+         this.balancePoint.speed = 0;
+         
+       }
+    
+    
   }
 }
-
-
 
 // the state of exercise 3
 // Adrian
